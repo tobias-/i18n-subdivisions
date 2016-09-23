@@ -40,7 +40,7 @@ JClass parseHtml(CountryCode cc, URL uri) {
                 throw new RuntimeException("For ${uri}, expected (Country=${cc}) but found (Country=${newCC})")
             }
             def subDivisionCode = trim(row.child(1).text())
-            def subDivisionName = trim(row.child(2).text())
+            def subDivisionName = trim(row.child(2).text().replaceFirst(/\(.+separate entry[^\)]+\)/,""))
             parsedData[subDivisionCode] = subDivisionName;
         }
     } catch (FileNotFoundException ignored) {
