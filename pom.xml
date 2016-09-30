@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>be.olsson</groupId>
     <artifactId>i18n-subdivisions</artifactId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.2</version>
     <packaging>jar</packaging>
     <name>Subdivision(State/Province) extension for the Neo Visionaries Internationalization Package</name>
     <url>https://github.com/tobias-/i18n-subdivisions</url>
@@ -27,7 +27,7 @@
 	<connection>scm:git:git@github.com:tobias-/i18n-subdivisions.git</connection>
 	<developerConnection>scm:git:git@github.com:tobias-/i18n-subdivisions.git</developerConnection>
 	<url>git@github.com:tobias-/i18n-subdivisions.git</url>
-	<tag>HEAD</tag>
+	<tag>i18n-subdivisions-0.2</tag>
     </scm>
 
     <properties>
