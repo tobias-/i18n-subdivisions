@@ -1,5 +1,4 @@
 
-
 buildscript {
     dependencies {
          classpath 'org.jsoup:jsoup:1.11.3'
@@ -7,6 +6,7 @@ buildscript {
     }
 }
 
+apply plugin: "base"
 
 wrapper {
     distributionType = Wrapper.DistributionType.ALL
