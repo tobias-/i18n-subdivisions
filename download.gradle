@@ -1,0 +1,12 @@
+buildscript {
+    dependencies {
+        classpath 'org.jsoup:jsoup:1.11.3'
+        classpath 'com.squareup.okhttp3:okhttp:3.11.0'
+        classpath 'com.neovisionaries:nv-i18n:1.23'
+        classpath 'com.fasterxml.jackson.core:jackson-databind:2.9.7'
+    }
+}
+
+task download {
+    OkhttpClient
+}
