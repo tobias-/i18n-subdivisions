@@ -34,7 +34,8 @@
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	<buildresources>${project.basedir}/src/build/resources/</buildresources>
 	<subdivision.java.sources>${project.build.directory}/generated-sources/subdivisions/</subdivision.java.sources>
-	<nvi18n.version>1.18</nvi18n.version>
+	<nvi18n.version>1.25</nvi18n.version>
+			<groovy.version>2.5.7</groovy.version>
     </properties>
 
     <distributionManagement>
@@ -56,6 +57,7 @@
 	    <artifactId>nv-i18n</artifactId>
 	    <version>${nvi18n.version}</version>
 	</dependency>
+
     </dependencies>
 
     <profiles>
@@ -160,11 +162,11 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.4</version>
 		    </dependency>
-		    <dependency>
-			<groupId>com.sun.codemodel</groupId>
-			<artifactId>codemodel</artifactId>
-			<version>2.6</version>
-		    </dependency>
+			 <dependency>
+				 <groupId>org.kohsuke.codemodel</groupId>
+				 <artifactId>codemodel</artifactId>
+				 <version>2.7</version>
+			 </dependency>
 		</dependencies>
 	    </plugin>
 	</plugins>
@@ -199,8 +201,8 @@
 		    <dependencies>
 			<dependency>
 			    <groupId>org.codehaus.groovy</groupId>
-			    <artifactId>groovy-all</artifactId>
-			    <version>2.4.5</version>
+			    <artifactId>groovy</artifactId>
+			    <version>${groovy.version}</version>
 			</dependency>
 			<dependency>
 			    <groupId>com.neovisionaries</groupId>
