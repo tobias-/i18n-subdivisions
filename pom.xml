@@ -32,8 +32,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <buildresources>${project.basedir}/src/build/resources/</buildresources>
     <subdivision.java.sources>${project.build.directory}/generated-sources/subdivisions/</subdivision.java.sources>
-    <nvi18n.version>1.25</nvi18n.version>
-    <groovy.version>2.5.7</groovy.version>
+    <nvi18n.version>1.29</nvi18n.version>
+    <groovy.version>3.0.9</groovy.version>
   </properties>
   <distributionManagement>
     <repository>
@@ -148,12 +148,12 @@
           <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.8.3</version>
+            <version>1.14.2</version>
           </dependency>
           <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
+            <version>3.12.0</version>
           </dependency>
           <dependency>
             <groupId>org.kohsuke.codemodel</groupId>
