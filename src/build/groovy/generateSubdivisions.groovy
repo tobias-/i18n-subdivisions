@@ -21,14 +21,14 @@ final JClass countrySubdivisionClass = cm._class("${JAVA_PACKAGE}.CountryCodeSub
 class SubDiv {
     String code;
     String name;
-    String source;
+    final List<String> source = new ArrayList<>();
 }
 countrySubdivisionClass.with {
     method(0, String.class, "getCode")
     method(0, CountryCode.class, "getCountryCode")
     method(0, boolean.class, "isRealRegion")
     method(0, String.class, "getName")
-    method(0, String.class, "getSource")
+    method(0, String[].class, "getSource")
 }
 
  Map<String, SubDiv> parseHtmlUnece(CountryCode cc, URL uri, URL sourceUrl) {
@@ -50,7 +50,7 @@ countrySubdivisionClass.with {
             SubDiv subDiv = new SubDiv()
             subDiv.code = subDivisionCode
             subDiv.name = subDivisionName
-            subDiv.source = sourceUrl.text
+            subDiv.source.add(sourceUrl.text)
             parsedData[subDivisionCode] = subDiv
         }
     } catch (FileNotFoundException ignored) {
@@ -90,7 +90,7 @@ Map<String, SubDiv> parseHtmlWiki(CountryCode cc, URL uri, URL sourceUrl) {
                         SubDiv sub = new SubDiv()
                         sub.code = subDivisionCode
                         sub.name= subDivisionName
-                        sub.source = sourceUrl.text
+                        sub.source.add(sourceUrl.text)
                         parsedData[subDivisionCode] = sub
                     }
                 }
@@ -109,6 +109,9 @@ JClass parseHtml(CountryCode cc, URL uneceUri, URL sourceUri,  URL wikiUri, URL 
         if (! parsedData.containsKey(k)) {
             System.out.println("Found in wiki, but not in unece " + cc + " " + k + " = " + v)
             parsedData.put(k, v)
+        } else {
+            SubDiv subDiv = parsedData.get(k);
+            subDiv.source.add(wikiSourceUri.text)
         }
     }
     generateClass(cc, parsedData)
@@ -120,7 +123,7 @@ JClass generateClass(CountryCode countryCode, Map<String, SubDiv> parsedData) {
     dc._implements(countrySubdivisionClass)
     JFieldVar name = dc.field(JMod.PRIVATE | JMod.FINAL, String.class, "name")
     JFieldVar code = dc.field(JMod.PRIVATE | JMod.FINAL, String.class, "code")
-    JFieldVar source = dc.field(JMod.PRIVATE | JMod.FINAL, String.class, "source")
+    JFieldVar source = dc.field(JMod.PRIVATE | JMod.FINAL, String[].class, "source")
     dc.method(JMod.PUBLIC, CountryCode.class, "getCountryCode").with {
         //annotate(Override.class)
         body().with {
@@ -139,7 +142,7 @@ JClass generateClass(CountryCode countryCode, Map<String, SubDiv> parsedData) {
             _return(name)
         }
     }
-    dc.method(JMod.PUBLIC, String.class, "getSource").with {
+    dc.method(JMod.PUBLIC, String[].class, "getSource").with {
         //annotate(Override.class)
         body().with {
             _return(source)
@@ -149,7 +152,7 @@ JClass generateClass(CountryCode countryCode, Map<String, SubDiv> parsedData) {
     dc.constructor(0).with {
         def subDivName = param(String.class, "subDivisionName")
         def subDivCode = param(String.class, "subDivisionCode")
-        def subDivSource = param(String.class, "subDivisionSource")
+        def subDivSource = varParam(String.class, "subDivisionSource")
 
         body().with {
             assign(JExpr._this().ref(name), subDivName)
@@ -167,7 +170,9 @@ JClass generateClass(CountryCode countryCode, Map<String, SubDiv> parsedData) {
             dc.enumConstant(escapedCode).with {
                 arg(JExpr.lit(subDiv.name))
                 arg(JExpr.lit(subDiv.code))
-                arg(JExpr.lit(subDiv.source))
+                for (String  so : subDiv.source) {
+                    arg(JExpr.lit(so))
+                }
 
             }
         }

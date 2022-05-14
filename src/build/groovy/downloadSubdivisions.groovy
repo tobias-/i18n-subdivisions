@@ -5,7 +5,7 @@ buildResources.mkdirs()
 CountryCode.values().each {
     if (it.assignment == CountryCode.Assignment.OFFICIALLY_ASSIGNED) {
         String html = null
-        URL url = new URL("http://www.unece.org/fileadmin/DAM/cefact/locode/Subdivision/${it.alpha2.toLowerCase(Locale.US)}Sub.htm")
+        URL url = new URL("https://www.unece.org/fileadmin/DAM/cefact/locode/Subdivision/${it.alpha2.toLowerCase(Locale.US)}Sub.htm")
 
         try {
             html = url.getText("UTF-8")
